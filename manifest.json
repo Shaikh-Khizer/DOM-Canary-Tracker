@@ -3,7 +3,7 @@
   "name": "DOM Canary Tracker",
   "version": "1.0.0",
   "description": "Traces runtime DOM creation and canary string propagation in JavaScript-heavy applications.",
-  "author": "DOM Canary Tracker",
+  "author": "Khizer",
 
   "browser_specific_settings": {
     "gecko": {
