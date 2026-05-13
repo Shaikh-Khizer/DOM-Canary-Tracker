@@ -306,20 +306,6 @@ manifest.json
 
 ---
 
-# Disclaimer
-
-This tool is intended for:
-
-* debugging
-* frontend analysis
-* authorized security testing
-* runtime observability
-* educational research
-
-Only use against applications you own or are authorized to test.
-
----
-
 # License
 
-MIT License
+[MIT License](LICENSE)
