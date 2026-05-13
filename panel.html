@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM Canary Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  TOOLBAR                                             ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <header class="toolbar">
+    <div class="toolbar-left">
+      <span class="logo">DOM Canary</span>
+      <div id="status-bar" class="status-bar"></div>
+    </div>
+
+    <div class="toolbar-right">
+      <button id="btn-pause" class="btn btn-pause">⏸ Pause</button>
+      <button id="btn-clear" class="btn btn-danger">🗑 Clear</button>
+      <button id="btn-export" class="btn btn-export">⬇ Export</button>
+    </div>
+  </header>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  CANARY CONFIG BAR                                   ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <section class="canary-bar">
+    <label class="canary-label">🎯 Canary String:</label>
+    <input
+      id="canary-input"
+      type="text"
+      class="canary-input"
+      placeholder="e.g. CANARY_123 or secret_token"
+      spellcheck="false"
+      autocomplete="off"
+    />
+    <button id="btn-set-canary" class="btn btn-set-canary">Track</button>
+    <button id="btn-clear-canary" class="btn btn-danger">🧹 Clear Canary</button>
+    <span id="canary-indicator" class="canary-indicator">No canary set</span>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  TABS                                                ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <nav class="tab-bar">
+    <button class="tab-btn active" data-tab="dom">
+      DOM Events <span class="tab-count" id="tab-dom-count">0</span>
+    </button>
+    <button class="tab-btn" data-tab="canary">
+      Canary Flow <span class="tab-count tab-count-canary" id="tab-canary-count">0</span>
+    </button>
+  </nav>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  FILTER ROW                                          ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <section class="filter-bar">
+    <div class="filter-group">
+      <label class="filter-label">🔍 Search</label>
+      <input
+        id="search-input"
+        type="text"
+        class="filter-input"
+        placeholder="Filter by tag, function, file…"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Type</label>
+      <select id="filter-type" class="filter-select">
+        <option value="">All types</option>
+        <!-- DOM types -->
+        <optgroup label="DOM Operations">
+          <option value="createElement">createElement</option>
+          <option value="appendChild">appendChild</option>
+          <option value="insertBefore">insertBefore</option>
+          <option value="removeChild">removeChild</option>
+          <option value="replaceChild">replaceChild</option>
+          <option value="prepend">prepend</option>
+          <option value="append">append</option>
+          <option value="insertAdjacentHTML">insertAdjacentHTML</option>
+          <option value="innerHTML">innerHTML</option>
+          <option value="outerHTML">outerHTML</option>
+        </optgroup>
+        <!-- Canary access types -->
+        <optgroup label="Canary Access">
+          <option value="fetch:url">fetch URL</option>
+          <option value="fetch:body">fetch body</option>
+          <option value="xhr:send">XHR send</option>
+          <option value="xhr:open">XHR open</option>
+          <option value="websocket:send">WebSocket send</option>
+          <option value="JSON.stringify">JSON.stringify</option>
+          <option value="localStorage:getItem">localStorage get</option>
+          <option value="localStorage:setItem">localStorage set</option>
+          <option value="sessionStorage:getItem">sessionStorage get</option>
+          <option value="formdata:append">FormData append</option>
+          <option value="htmlWrite">HTML write</option>
+          <option value="clipboard:write">Clipboard write</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">File</label>
+      <input
+        id="filter-file"
+        type="text"
+        class="filter-input filter-input-sm"
+        placeholder="e.g. app.js"
+        autocomplete="off"
+      />
+    </div>
+  </section>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  LOG TABLE                                           ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <div class="table-wrapper">
+    <table class="log-table">
+      <thead>
+        <tr>
+          <th class="col-type">Event Type</th>
+          <th class="col-el">Element / Value</th>
+          <th class="col-fn">Function</th>
+          <th class="col-file">File</th>
+          <th class="col-line">Line</th>
+          <th class="col-ts">Timestamp</th>
+          <th class="col-actions"></th>
+        </tr>
+      </thead>
+      <tbody id="log-tbody">
+        <!-- Rows rendered by panel.js -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════╗ -->
+  <!-- ║  FOOTER                                              ║ -->
+  <!-- ╚══════════════════════════════════════════════════════╝ -->
+  <footer class="footer">
+    <span>DOM Canary Tracker v1.0</span>
+    <span id="footer-note">Max 5,000 entries · Last 500 rendered</span>
+  </footer>
+
+  <script src="panel.js"></script>
+</body>
+</html>

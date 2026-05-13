@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "DOM Canary Tracker",
+  "version": "1.0.0",
+  "description": "Traces runtime DOM creation and canary string propagation in JavaScript-heavy applications.",
+  "author": "DOM Canary Tracker",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dom-canary-tracker@devtools",
+      "strict_min_version": "89.0"
+    }
+  },
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+
+  "devtools_page": "devtools.html",
+
+  "web_accessible_resources": [
+    "injected.js"
+  ],
+
+  "icons": {
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png"
+  }
+}
